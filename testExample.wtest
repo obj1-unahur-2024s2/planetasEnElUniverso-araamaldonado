@@ -1,9 +1,50 @@
-import example.pepita
+import example.*
 
-describe "group of tests for pepita" {
+describe "pruebas parte 1" {
+  // Personas
+  const araceli = new Persona (edad = 70)
+  const marcos = new Persona (edad = 27)
+  const agustin = new Persona (edad= 30)
+  const jeremias = new Persona(edad = 50)
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  // Construcciones
+  const muralla1 = new Muralla (longitud = 1000)
+  const muralla2 = new Muralla (longitud = 1500)
+  const muralla3 = new Muralla (longitud = 10)
+  const museo1 = new Museo (superficieCubierta = 500, indiceImportancia = 5)
+
+  // Planetas
+  const saturno = new Planeta ()
+  const mercurio = new Planeta()
+
+  method initialize() {
+    // Lista personas
+    saturno.agregarHabitantes(araceli)
+    saturno.agregarHabitantes(marcos)
+    saturno.agregarHabitantes(agustin)
+    saturno.agregarHabitantes(jeremias)
+
+    araceli.gastarMonedas(20)
+
+    saturno.agregarConstrucciones(muralla1)
+    saturno.agregarConstrucciones(muralla2)
+    saturno.agregarConstrucciones(museo1)
+
+    mercurio.agregarConstrucciones(muralla3)
   }
 
+  test "la delegación diplomática está formada por tres de ellas" {
+    // assert
+      assert.equals(3, saturno.delegacionDiplomatica().size())
+  }
+
+  test "es valioso" {
+    // assert
+      assert.that(saturno.esValioso())
+  }
+
+  test "agregar otro planeta, con habitantes y construcciones, pero que no sea valioso." {
+    // assert
+      assert.notThat(mercurio.esValioso())
+  }
 }
